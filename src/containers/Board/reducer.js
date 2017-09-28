@@ -11,10 +11,11 @@ import {
   FOCUS_BOARD_BUTTON
 } from './constants';
 
-const [...boards] = defaultBoards.advanced;
 const rootBoardId = 'root';
 const initialState = {
-  boards,
+  boards: defaultBoards.boards,
+  buttons: defaultBoards.buttons,
+  images: defaultBoards.images,
   activeBoardId: rootBoardId,
   navHistory: [rootBoardId]
 };
