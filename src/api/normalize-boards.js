@@ -2,44 +2,53 @@ const fs = require('fs');
 const shortid = require('shortid');
 const boardsOBF = require('./boards.obf.json');
 
-const boards = {};
-const images = {};
-
+const flatBoards = {};
+const flatImages = {};
+let flatButtons = {};
+// todo rewrite with https://github.com/paularmstrong/normalizr
 boardsOBF.forEach(board => {
   const boardId = shortid.generate();
-  const buttons = {};
-
+  const flatBoardButtons = {};
   board.buttons.forEach(button => {
     const buttonId = shortid.generate();
     const imageId = shortid.generate();
+
     const buttonImage = Object.values(board.images).find(
       image => image.id === button.image_id
     );
-    buttons[buttonId] = { ...button, id: buttonId };
+    flatBoardButtons[buttonId] = { ...button, id: buttonId };
 
     if (buttonImage) {
-      const image = Object.values(images).find(image => {
+      const flatImage = Object.values(flatImages).find(image => {
         return image.symbol.filename === buttonImage.symbol.filename;
       });
 
-      if (image) {
-        buttons[buttonId].image_id = image.id;
+      if (flatImage) {
+        flatBoardButtons[buttonId].image_id = flatImage.id;
       } else {
-        images[imageId] = { ...buttonImage, id: imageId };
-        buttons[buttonId].image_id = imageId;
+        flatImages[imageId] = { ...buttonImage, id: imageId };
+        flatBoardButtons[buttonId].image_id = imageId;
       }
     }
   });
 
-  boards[boardId] = {
+  flatBoards[boardId] = {
     id: boardId,
     name: board.name,
-    buttons
+    format: board.format,
+    description_html: board.description_html,
+    license: board.license,
+    buttons: Object.keys(flatBoardButtons)
   };
+  flatButtons = { ...flatButtons, ...flatBoardButtons };
 });
 
 fs.writeFileSync(
   './boards-normalized.json',
-  JSON.stringify({ boards, images }),
+  JSON.stringify({
+    boards: flatBoards,
+    buttons: flatButtons,
+    images: flatImages
+  }),
   'utf-8'
 );
