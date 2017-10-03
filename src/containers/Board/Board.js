@@ -1,27 +1,30 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {} from './actions';
+import { pushOutput, changeOutput } from './actions';
 import Board from '../../components/Board';
+
 export class BoardContainer extends Component {
   static propTypes = {
-    activeBoardId: PropTypes.bool,
+    activeBoardId: PropTypes.string,
 
     boards: PropTypes.shape({
-      byId: PropTypes.shape({
-        id: PropTypes.string,
-        name: PropTypes.string,
-        format: PropTypes.string,
-        license: PropTypes.shape({
-          type: PropTypes.string,
-          copyright_notice_url: PropTypes.string,
-          source_url: PropTypes.string,
-          author_name: PropTypes.string,
-          author_url: PropTypes.string,
-          author_email: PropTypes.string
-        }),
-        buttons: PropTypes.arrayOf(PropTypes.string)
-      })
+      byId: PropTypes.objectOf(
+        PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+          format: PropTypes.string,
+          license: PropTypes.shape({
+            type: PropTypes.string,
+            copyright_notice_url: PropTypes.string,
+            source_url: PropTypes.string,
+            author_name: PropTypes.string,
+            author_url: PropTypes.string,
+            author_email: PropTypes.string
+          }),
+          buttons: PropTypes.arrayOf(PropTypes.string)
+        })
+      )
     }),
 
     buttons: PropTypes.shape({
@@ -49,22 +52,54 @@ export class BoardContainer extends Component {
       )
     }),
 
+    output: PropTypes.arrayOf(
+      PropTypes.shape({
+        image: PropTypes.string,
+        label: PropTypes.string
+      })
+    ),
+
+    changeOutput: PropTypes.func,
+    pushOutput: PropTypes.func,
+
     breadcrumbs: PropTypes.arrayOf(PropTypes.string)
   };
 
-  handleButtonClick = () => {};
+  handleOutputClick = output => {
+    console.log(output);
+  };
 
-  handleButtonFocus = () => {};
+  handleOutputChange = output => {
+    const { changeOutput } = this.props;
+    changeOutput(output);
+  };
+
+  handleButtonClick = buttonId => {
+    const { buttons, images, pushOutput } = this.props;
+    const button = buttons[buttonId];
+    const value = {
+      label: button.label,
+      image: images[button.image_id].symbol.filename
+    };
+    pushOutput(value);
+  };
+
+  handleButtonFocus = buttonId => {
+    console.log('todo: handleButtonFocus');
+  };
 
   render() {
-    const { activeBoardId, boards, buttons, images } = this.props;
-    const activeBoard = boards[activeBoardId];
+    const { activeBoardId, boards, buttons, images, output } = this.props;
+    const board = boards[activeBoardId];
 
     return (
       <Board
-        board={activeBoard}
+        board={board}
         buttons={buttons}
         images={images}
+        output={output}
+        onOutputClick={this.handleOutputClick}
+        onOutputChange={this.handleOutputChange}
         onButtonClick={this.handleButtonClick}
         onButtonFocus={this.handleButtonFocus}
       />
@@ -73,17 +108,26 @@ export class BoardContainer extends Component {
 }
 
 const mapStateToProps = state => {
+  const { board } = state;
+
   return {
-    activeBoardId: state.board.activeBoardId,
-    boards: state.board.boards,
-    buttons: state.board.buttons,
-    images: state.board.images
+    activeBoardId: board.activeBoardId,
+    boards: board.boards,
+    buttons: board.buttons,
+    images: board.images,
+    output: board.output,
+    breadcrumbs: board.breadcrumbs
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    // dispatch(focusBoardButton(symbolId, boardId))
+    pushOutput: output => {
+      dispatch(pushOutput(output));
+    },
+    changeOutput: output => {
+      dispatch(changeOutput(output));
+    }
   };
 };
 

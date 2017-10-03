@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
-import classNames from 'classnames';
 import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import ArrowBackIcon from 'material-ui-icons/ArrowBack';
@@ -14,7 +13,11 @@ import './Navbar.css';
 Navbar.propTypes = {
   className: PropTypes.string,
   intl: intlShape.isRequired,
-  title: PropTypes.string
+  title: PropTypes.string,
+  disabled: PropTypes.bool,
+  isLocked: PropTypes.bool,
+  onBackClick: PropTypes.func,
+  onLockClick: PropTypes.func
 };
 
 Navbar.defaultProps = {
@@ -28,7 +31,6 @@ const styles = {
 };
 
 function Navbar({
-  className,
   classes,
   intl,
   title,
@@ -38,7 +40,7 @@ function Navbar({
   onLockClick
 }) {
   return (
-    <div className={classNames('Navbar', className)}>
+    <div className="Navbar">
       <h2 className="Navbar__title">{title}</h2>
       <div className="Navbar__group Navbar__group--start">
         <IconButton
@@ -66,7 +68,7 @@ function Navbar({
           color="contrast"
           onClick={onLockClick}
         >
-          {isLocked ? <LockOutlineIcon /> : <LockOpenIcon />}
+          {isLocked ? <LockOpenIcon /> : <LockOutlineIcon />}
         </IconButton>
       </div>
     </div>

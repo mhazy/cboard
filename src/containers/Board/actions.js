@@ -7,6 +7,8 @@ import {
   DELETE_SYMBOLS,
   EDIT_SYMBOLS,
   FOCUS_BOARD_BUTTON,
+  CHANGE_OUTPUT,
+  PUSH_OUTPUT
 } from './constants';
 
 export function importBoards(boards) {
@@ -64,6 +66,20 @@ export function focusBoardButton(symbolId, boardId) {
   return {
     type: FOCUS_BOARD_BUTTON,
     symbolId,
-    boardId,
-  }
+    boardId
+  };
+}
+
+export function changeOutput(output) {
+  return {
+    type: CHANGE_OUTPUT,
+    output
+  };
+}
+
+export function pushOutput(value) {
+  return {
+    type: PUSH_OUTPUT,
+    value
+  };
 }

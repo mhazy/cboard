@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 
+import Grid from '../../containers/Grid';
 import Output from './Output';
 import Navbar from './Navbar';
 import EditToolbar from './EditToolbar';
@@ -46,27 +47,30 @@ export class Board extends Component {
     }),
 
     onButtonClick: PropTypes.func.isRequired,
+    onButtonFocus: PropTypes.func.isRequired,
 
-    onButtonFocus: PropTypes.func.isRequired
+    output: PropTypes.shape({
+      image: PropTypes.string,
+      label: PropTypes.string
+    }),
+    onOutputClick: PropTypes.func,
+    onOutputChange: PropTypes.func
   };
 
-  state = {};
-
   renderButtons() {
-    const { buttons, images, onButtonClick, onButtonFocus } = this.props;
+    const { board, buttons, images, onButtonClick, onButtonFocus } = this.props;
 
-    return Object.values(buttons).map(button => {
+    return board.buttons.map(buttonId => {
+      const button = buttons[buttonId];
       const image = images[button.image_id];
-      const symbol =
-        image && image.symbol
-          ? `${image.symbol.set}/${image.symbol.filename}`
-          : '';
+      const symbol = image.symbol;
+      const imageSrc = symbol ? `symbols/${symbol.set}/${symbol.filename}` : '';
 
       return (
-        <div key={button.id}>
+        <div key={buttonId}>
           <BoardButton
             {...button}
-            symbol={symbol}
+            imageSrc={imageSrc}
             onClick={onButtonClick}
             onFocus={onButtonFocus}
           />
@@ -76,8 +80,20 @@ export class Board extends Component {
   }
 
   render() {
+    const { output, onOutputClick, onOutputChange } = this.props;
     const buttons = this.renderButtons();
-    return buttons;
+
+    return (
+      <div className="Board">
+        <Output
+          values={output}
+          onClick={onOutputClick}
+          onChange={onOutputChange}
+        />
+        <Navbar />
+        <Grid>{buttons}</Grid>
+      </div>
+    );
   }
 }
 

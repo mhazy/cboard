@@ -6593,7 +6593,7 @@
     "BkBggncqiZ": {
       "id": "BkBggncqiZ",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/speech_bubble.svg" }
+      "symbol": { "set": "cboard", "filename": "speech_bubble.svg" }
     },
     "Skvlln55oW": {
       "id": "Skvlln55oW",
@@ -6618,12 +6618,12 @@
     "H1Jllghc5j-": {
       "id": "H1Jllghc5j-",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/activities.svg" }
+      "symbol": { "set": "cboard", "filename": "activities.svg" }
     },
     "BJWegx39qjW": {
       "id": "BJWegx39qjW",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/emotions.svg" }
+      "symbol": { "set": "cboard", "filename": "emotions.svg" }
     },
     "Sk7glx255oZ": {
       "id": "Sk7glx255oZ",
@@ -6638,7 +6638,7 @@
     "r1Dgee3cqs-": {
       "id": "r1Dgee3cqs-",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/people.svg" }
+      "symbol": { "set": "cboard", "filename": "people.svg" }
     },
     "Bytexx2qcib": {
       "id": "Bytexx2qcib",
@@ -6648,7 +6648,7 @@
     "H1ollencqjZ": {
       "id": "H1ollencqjZ",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/kitchen_items.svg" }
+      "symbol": { "set": "cboard", "filename": "kitchen_items.svg" }
     },
     "rkpxegn55sW": {
       "id": "rkpxegn55sW",
@@ -6658,7 +6658,7 @@
     "Hy1Zggnc5jb": {
       "id": "Hy1Zggnc5jb",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/animals.svg" }
+      "symbol": { "set": "cboard", "filename": "animals.svg" }
     },
     "H1-Wxgn55iW": {
       "id": "H1-Wxgn55iW",
@@ -6668,17 +6668,17 @@
     "SyXWeg259i-": {
       "id": "SyXWeg259i-",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/weather.svg" }
+      "symbol": { "set": "cboard", "filename": "weather.svg" }
     },
     "SJSWeg295sb": {
       "id": "SJSWeg295sb",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/plants.svg" }
+      "symbol": { "set": "cboard", "filename": "plants.svg" }
     },
     "SkD-lenq5s-": {
       "id": "SkD-lenq5s-",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/sports.svg" }
+      "symbol": { "set": "cboard", "filename": "sports.svg" }
     },
     "HktZeen9ciW": {
       "id": "HktZeen9ciW",
@@ -6693,7 +6693,7 @@
     "Hkablg295s-": {
       "id": "Hkablg295s-",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/position.svg" }
+      "symbol": { "set": "cboard", "filename": "position.svg" }
     },
     "BJ1Ggx2cqo-": {
       "id": "BJ1Ggx2cqo-",
@@ -6703,7 +6703,7 @@
     "HJZzex295oW": {
       "id": "HJZzex295oW",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/actions.svg" }
+      "symbol": { "set": "cboard", "filename": "actions.svg" }
     },
     "rJQfexhc9iZ": {
       "id": "rJQfexhc9iZ",
@@ -6718,7 +6718,7 @@
     "BkPzxx25qoW": {
       "id": "BkPzxx25qoW",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/personal_hygiene.svg" }
+      "symbol": { "set": "cboard", "filename": "personal_hygiene.svg" }
     },
     "BJYfxxhq9iW": {
       "id": "BJYfxxhq9iW",
@@ -7389,8 +7389,8 @@
       "id": "rk4Ueexn59jW",
       "content_type": "image/svg+xml",
       "symbol": {
-        "set": "mulberry",
-        "filename": "images/clothing_accessories.svg"
+        "set": "cboard",
+        "filename": "clothing_accessories.svg"
       }
     },
     "HJULeglh9qsb": {
@@ -7931,22 +7931,22 @@
     "SkkSZxehq5sb": {
       "id": "SkkSZxehq5sb",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/wild_animals.svg" }
+      "symbol": { "set": "cboard", "filename": "wild_animals.svg" }
     },
     "BJ-HZgg29qoW": {
       "id": "BJ-HZgg29qoW",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/marine_animals.svg" }
+      "symbol": { "set": "cboard", "filename": "marine_animals.svg" }
     },
     "SJmHWlgh59jW": {
       "id": "SJmHWlgh59jW",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/insects.svg" }
+      "symbol": { "set": "cboard", "filename": "insects.svg" }
     },
     "SJBHZllhqqsW": {
       "id": "SJBHZllhqqsW",
       "content_type": "image/svg+xml",
-      "symbol": { "set": "mulberry", "filename": "images/birds.svg" }
+      "symbol": { "set": "cboard", "filename": "birds.svg" }
     },
     "B1wr-eg2q9sZ": {
       "id": "B1wr-eg2q9sZ",
