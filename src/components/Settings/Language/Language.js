@@ -83,9 +83,7 @@ export class Language extends Component {
         onRequestClose={this.handleCancel}
         onSubmit={this.handleSubmit}
       >
-        <List>
-          {listItems}
-        </List>
+        <List>{listItems}</List>
       </FullScreenDialog>
     );
   }

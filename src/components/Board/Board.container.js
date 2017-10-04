@@ -74,10 +74,12 @@ export class BoardContainer extends Component {
      */
     changeOutput: PropTypes.func,
     /**
-     * Action creator to push a value to output state.
+     * Action creator to push a value to output.
      */
     pushOutput: PropTypes.func,
-
+    /**
+     * Board navigation breadcrumbs
+     */
     breadcrumbs: PropTypes.arrayOf(PropTypes.string)
   };
 
