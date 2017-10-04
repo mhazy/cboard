@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 
-import Grid from '../../containers/Grid';
+// import Grid from '../../containers/Grid';
 import SymbolOutput from './SymbolOutput';
 import BoardButton from './BoardButton';
 
@@ -80,20 +80,19 @@ export class Board extends Component {
             onChange={onOutputChange}
           />
         </div>
+        <div className="Board__navbar" />
         <div className="Board__buttons">
-          <Grid>
-            {board.buttons.map(button => {
-              return (
-                <div key={button.id}>
-                  <BoardButton
-                    {...button}
-                    onClick={onButtonClick}
-                    onFocus={onButtonFocus}
-                  />
-                </div>
-              );
-            })}}
-          </Grid>
+          {board.buttons.map(button => {
+            return (
+              <div key={button.id}>
+                <BoardButton
+                  {...button}
+                  onClick={onButtonClick}
+                  onFocus={onButtonFocus}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     );

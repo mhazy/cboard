@@ -4,13 +4,19 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import { initApp } from './actions';
-import Board from '../Board';
+import { BoardContainer } from '../Board';
 import Notifications from '../Notifications';
 import './App.css';
 
 export class App extends Component {
   static propTypes = {
+    /**
+     * App locale
+     */
     locale: PropTypes.string,
+    /**
+     * App direction
+     */
     dir: PropTypes.string,
     initApp: PropTypes.func
   };
@@ -24,11 +30,11 @@ export class App extends Component {
     const { locale, dir } = this.props;
 
     return (
-      <div className="App" onClick={() => {}}>
+      <div className="App">
         <Helmet>
           <html lang={locale} dir={dir} />
         </Helmet>
-        <Board />
+        <BoardContainer />
         <Notifications />
       </div>
     );

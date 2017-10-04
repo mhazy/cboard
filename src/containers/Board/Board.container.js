@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushOutput, changeOutput } from './actions';
-import Board from '../../components/Board';
+import Board from './Board';
 
 export class BoardContainer extends Component {
   static propTypes = {
@@ -106,8 +106,11 @@ export class BoardContainer extends Component {
 
   render() {
     const { activeBoardId, boards, buttons, images, output } = this.props;
-    const board = boards[activeBoardId];
-
+    const { ...board } = boards[activeBoardId];
+    board.buttons = board.buttons.map(buttonId => {
+      const button = buttons[buttonId];
+      return { ...button, image: images[button.image_id].symbol.source_url };
+    });
     return (
       <Board
         board={board}

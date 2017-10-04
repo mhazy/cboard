@@ -7,8 +7,14 @@ import { loadLocaleData } from '../../i18n';
 
 export class LanguageProvider extends Component {
   static propTypes = {
-    locale: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired
+    /**
+     * @ignore
+     */
+    children: PropTypes.node.isRequired,
+    /**
+     * App locale
+     */
+    locale: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -38,7 +44,7 @@ export class LanguageProvider extends Component {
   }
 
   render() {
-    const { locale, children } = this.props;
+    const { children, locale } = this.props;
     if (!this.state.messages) {
       return null;
     }
