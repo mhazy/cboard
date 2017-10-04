@@ -112,7 +112,7 @@ export class SymbolOutput extends Component {
           >
             {symbols.map(({ label, image }, index) => (
               <div className="SymbolOutput__symbol" key={index}>
-                <Symbol label={label} image={image} />} />
+                <Symbol label={label} src={image} />
               </div>
             ))}
           </div>

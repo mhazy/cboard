@@ -91,7 +91,12 @@ export class BoardContainer extends Component {
     const button = buttons[buttonId];
     const value = {
       label: button.label,
-      image: images[button.image_id].symbol.filename
+      // todo outside as a function
+      image:
+        '/symbols/' +
+        images[button.image_id].symbol.set +
+        '/' +
+        images[button.image_id].symbol.filename
     };
     pushOutput(value);
   };

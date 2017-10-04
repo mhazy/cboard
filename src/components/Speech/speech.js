@@ -13,9 +13,9 @@ const speech = {
   getLocales() {
     return this.getVoices().then(voices => {
       const locales = [];
+
       voices.forEach(voice => {
         const locale = voice.lang.slice(0, 2);
-
         if (!locales.includes(locale)) {
           locales.push(locale);
         }

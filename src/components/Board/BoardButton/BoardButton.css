@@ -1,7 +1,7 @@
 .BoardButton {
-  height: 100%;
-  width: 100%;
-  padding: 20px 5px 0 5px;
+  height: 144px;
+  width: 33.33333%;
+  padding: 10px 5px 0 5px;
   border: none;
   background: none;
   cursor: pointer;
