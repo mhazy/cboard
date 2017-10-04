@@ -8,16 +8,45 @@ import './BoardButton.css';
 
 class BoardButton extends PureComponent {
   static propTypes = {
+    /**
+     * @ignore
+     */
     className: PropTypes.string,
+    /**
+     * @ignore
+     */
     children: PropTypes.node,
+    /**
+     * Button ID
+     */
     id: PropTypes.string,
+    /**
+     * Label to display
+     */
     label: PropTypes.string,
-    load_board: PropTypes.shape({ ic: PropTypes.string }),
+    /**
+     * Board to load when clicking a folder
+     */
+    load_board: PropTypes.shape({ id: PropTypes.string }),
+    /**
+     * Text to vocalize (speech synthesis), overrides label
+     */
     vocalization: PropTypes.string,
-    image_id: PropTypes.string,
+    /**
+     * Image to display source path
+     */
     imageSrc: PropTypes.string,
+    /**
+     * Callback fired when clicking a button
+     */
     onClick: PropTypes.func.isRequired,
+    /**
+     * Callback fired when button is focused
+     */
     onFocus: PropTypes.func.isRequired,
+    /**
+     * If true, button element will have focus
+     */
     hasFocus: PropTypes.bool
   };
 

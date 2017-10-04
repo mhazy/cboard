@@ -11,6 +11,8 @@ import ClearIcon from 'material-ui-icons/Clear';
 import Symbol from '../Symbol';
 import './Output.css';
 
+const invertDirection = dir => (dir === 'ltr' ? 'rtl' : 'ltr');
+
 const styles = {
   button: {
     height: '64px',
@@ -24,14 +26,32 @@ const styles = {
 
 class Output extends Component {
   static propTypes = {
+    /**
+     * @ignore
+     */
     className: PropTypes.string,
+    /**
+     * Values to display
+     */
     values: PropTypes.arrayOf(
       PropTypes.shape({
+        /**
+         * Label to display
+         */
         label: PropTypes.string,
+        /**
+         * Image to display source path
+         */
         image: PropTypes.string
       })
     ),
+    /**
+     * Callback fired when user click the output values
+     */
     onClick: PropTypes.func,
+    /**
+     * Callback fired when output values change from inside the component
+     */
     onChange: PropTypes.func
   };
 
@@ -68,12 +88,12 @@ class Output extends Component {
 
   render() {
     const { className, classes, dir, values } = this.props;
-    const oppositeDir = dir === 'ltr' ? 'rtl' : 'ltr';
+
     return (
       <div className={classNames('Output', className)}>
         <div
           className="Output__scroll"
-          style={{ direction: oppositeDir }}
+          style={{ direction: invertDirection(dir) }}
           tabIndex={values.length ? '0' : '-1'}
           onClick={this.handleOutputClick}
           onKeyDown={this.handleOutputKeyDown}

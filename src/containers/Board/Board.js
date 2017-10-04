@@ -1,134 +1,103 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { pushOutput, changeOutput } from './actions';
-import Board from '../../components/Board';
+import { injectIntl, intlShape } from 'react-intl';
 
-export class BoardContainer extends Component {
+import Grid from '../../containers/Grid';
+import Output from './Output';
+import BoardButton from './BoardButton';
+
+import './Board.css';
+
+export class Board extends Component {
   static propTypes = {
-    activeBoardId: PropTypes.string,
-
-    boards: PropTypes.shape({
-      byId: PropTypes.objectOf(
-        PropTypes.shape({
-          id: PropTypes.string,
-          name: PropTypes.string,
-          format: PropTypes.string,
-          license: PropTypes.shape({
-            type: PropTypes.string,
-            copyright_notice_url: PropTypes.string,
-            source_url: PropTypes.string,
-            author_name: PropTypes.string,
-            author_url: PropTypes.string,
-            author_email: PropTypes.string
-          }),
-          buttons: PropTypes.arrayOf(PropTypes.string)
-        })
-      )
-    }),
-
-    buttons: PropTypes.shape({
-      byId: PropTypes.objectOf(
+    /**
+     * @ignore
+     */
+    className: PropTypes.string,
+    /**
+     * 
+     */
+    intl: intlShape.isRequired,
+    /**
+     * Contains all the data needed to render a single board
+     */
+    board: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      buttons: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.string,
           label: PropTypes.string,
           background_color: PropTypes.string,
           load_board: PropTypes.shape({ id: PropTypes.string }),
-          image_id: PropTypes.string
+          image: PropTypes.string
         })
       )
     }),
-
-    images: PropTypes.shape({
-      byId: PropTypes.objectOf(
-        PropTypes.shape({
-          id: PropTypes.string,
-          content_type: PropTypes.string,
-          symbol: PropTypes.shape({
-            set: PropTypes.string,
-            filename: PropTypes.string
-          })
-        })
-      )
-    }),
-
+    /**
+     * Callback fired when a button is clicked
+     */
+    onButtonClick: PropTypes.func.isRequired,
+    /**
+     * Callback fired when a button is focused
+     */
+    onButtonFocus: PropTypes.func.isRequired,
+    /**
+     * Ouput values to display
+     */
     output: PropTypes.arrayOf(
       PropTypes.shape({
         image: PropTypes.string,
         label: PropTypes.string
       })
     ),
-
-    changeOutput: PropTypes.func,
-    pushOutput: PropTypes.func,
-
-    breadcrumbs: PropTypes.arrayOf(PropTypes.string)
-  };
-
-  handleOutputClick = output => {
-    console.log(output);
-  };
-
-  handleOutputChange = output => {
-    const { changeOutput } = this.props;
-    changeOutput(output);
-  };
-
-  handleButtonClick = buttonId => {
-    const { buttons, images, pushOutput } = this.props;
-    const button = buttons[buttonId];
-    const value = {
-      label: button.label,
-      image: images[button.image_id].symbol.filename
-    };
-    pushOutput(value);
-  };
-
-  handleButtonFocus = buttonId => {
-    console.log('todo: handleButtonFocus');
+    /**
+     * Callback fired when output element is clicked
+     */
+    onOutputClick: PropTypes.func,
+    /**
+     * Callback fired when output values are changed
+     */
+    onOutputChange: PropTypes.func
   };
 
   render() {
-    const { activeBoardId, boards, buttons, images, output } = this.props;
-    const board = boards[activeBoardId];
+    const {
+      board,
+      output,
+      onButtonClick,
+      onButtonFocus,
+      onOutputClick,
+      onOutputChange
+    } = this.props;
 
     return (
-      <Board
-        board={board}
-        buttons={buttons}
-        images={images}
-        output={output}
-        onOutputClick={this.handleOutputClick}
-        onOutputChange={this.handleOutputChange}
-        onButtonClick={this.handleButtonClick}
-        onButtonFocus={this.handleButtonFocus}
-      />
+      <div className="Board">
+        <div className="Board__output">
+          <Output
+            values={output}
+            onClick={onOutputClick}
+            onChange={onOutputChange}
+          />
+        </div>
+        <div className="Board__buttons">
+          <Grid>
+            {board.buttons.map(button => {
+              return (
+                <div key={button.id}>
+                  <BoardButton
+                    {...button}
+                    onClick={onButtonClick}
+                    onFocus={onButtonFocus}
+                  />
+                </div>
+              );
+            })}}
+          </Grid>
+        </div>
+      </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  const { board } = state;
-
-  return {
-    activeBoardId: board.activeBoardId,
-    boards: board.boards,
-    buttons: board.buttons,
-    images: board.images,
-    output: board.output,
-    breadcrumbs: board.breadcrumbs
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    pushOutput: output => {
-      dispatch(pushOutput(output));
-    },
-    changeOutput: output => {
-      dispatch(changeOutput(output));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer);
+export default injectIntl(Board);
