@@ -91,7 +91,7 @@ class BoardButton extends PureComponent {
         onFocus={this.handleFocus}
         ref={element => (this.buttonElement = element)}
       >
-        <Symbol src={image} label={label} />} />
+        <Symbol src={image} label={label} />
         {children}
       </button>
     );

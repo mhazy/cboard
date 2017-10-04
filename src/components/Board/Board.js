@@ -80,19 +80,16 @@ export class Board extends Component {
             onChange={onOutputChange}
           />
         </div>
-        <div className="Board__navbar" />
+        <div className="Board__navigation-bar" />
         <div className="Board__buttons">
-          {board.buttons.map(button => {
-            return (
-              <div key={button.id}>
-                <BoardButton
-                  {...button}
-                  onClick={onButtonClick}
-                  onFocus={onButtonFocus}
-                />
-              </div>
-            );
-          })}
+          {board.buttons.map(button => (
+            <BoardButton
+              key={button.id}
+              {...button}
+              onClick={onButtonClick}
+              onFocus={onButtonFocus}
+            />
+          ))}
         </div>
       </div>
     );

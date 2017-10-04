@@ -133,7 +133,6 @@ const initialState = {
 //   }
 // }
 function boardReducer(state = initialState, action) {
-  debugger;
   switch (action.type) {
     case CHANGE_OUTPUT:
       return {

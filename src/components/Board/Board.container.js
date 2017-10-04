@@ -7,59 +7,53 @@ import Board from './Board';
 export class BoardContainer extends Component {
   static propTypes = {
     /**
-     * ID of the current active board in view
+     * ID of the board in view
      */
     activeBoardId: PropTypes.string,
     /**
      * Boards prop, contains the entire boards.
      */
-    boards: PropTypes.shape({
-      byId: PropTypes.objectOf(
-        PropTypes.shape({
-          id: PropTypes.string,
-          name: PropTypes.string,
-          format: PropTypes.string,
-          license: PropTypes.shape({
-            type: PropTypes.string,
-            copyright_notice_url: PropTypes.string,
-            source_url: PropTypes.string,
-            author_name: PropTypes.string,
-            author_url: PropTypes.string,
-            author_email: PropTypes.string
-          }),
-          buttons: PropTypes.arrayOf(PropTypes.string)
-        })
-      )
-    }),
+    boards: PropTypes.objectOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        format: PropTypes.string,
+        license: PropTypes.shape({
+          type: PropTypes.string,
+          copyright_notice_url: PropTypes.string,
+          source_url: PropTypes.string,
+          author_name: PropTypes.string,
+          author_url: PropTypes.string,
+          author_email: PropTypes.string
+        }),
+        buttons: PropTypes.arrayOf(PropTypes.string)
+      })
+    ),
     /**
      * All buttons used by boards
      */
-    buttons: PropTypes.shape({
-      byId: PropTypes.objectOf(
-        PropTypes.shape({
-          id: PropTypes.string,
-          label: PropTypes.string,
-          background_color: PropTypes.string,
-          load_board: PropTypes.shape({ id: PropTypes.string }),
-          image_id: PropTypes.string
-        })
-      )
-    }),
+    buttons: PropTypes.objectOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        label: PropTypes.string,
+        background_color: PropTypes.string,
+        load_board: PropTypes.shape({ id: PropTypes.string }),
+        image_id: PropTypes.string
+      })
+    ),
     /**
      * All images used by boards
      */
-    images: PropTypes.shape({
-      byId: PropTypes.objectOf(
-        PropTypes.shape({
-          id: PropTypes.string,
-          content_type: PropTypes.string,
-          symbol: PropTypes.shape({
-            set: PropTypes.string,
-            filename: PropTypes.string
-          })
+    images: PropTypes.objectOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        content_type: PropTypes.string,
+        symbol: PropTypes.shape({
+          set: PropTypes.string,
+          filename: PropTypes.string
         })
-      )
-    }),
+      })
+    ),
     /**
      * Output data for the Output component.
      */
@@ -78,7 +72,7 @@ export class BoardContainer extends Component {
      */
     pushOutput: PropTypes.func,
     /**
-     * Board navigation breadcrumbs
+     * Board navigation history stack
      */
     breadcrumbs: PropTypes.arrayOf(PropTypes.string)
   };
@@ -108,11 +102,20 @@ export class BoardContainer extends Component {
 
   render() {
     const { activeBoardId, boards, buttons, images, output } = this.props;
+    // todo reselect
     const { ...board } = boards[activeBoardId];
     board.buttons = board.buttons.map(buttonId => {
       const button = buttons[buttonId];
-      return { ...button, image: images[button.image_id].symbol.source_url };
+      return {
+        ...button,
+        image:
+          '/symbols/' +
+          images[button.image_id].symbol.set +
+          '/' +
+          images[button.image_id].symbol.filename
+      };
     });
+
     return (
       <Board
         board={board}

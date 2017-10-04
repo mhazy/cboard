@@ -20,9 +20,9 @@ import FullScreenDialog, {
 } from '../../../components/FullScreenDialog';
 import InputImage from '../../../components/InputImage';
 
-import './SymbolDetails.css';
+import './BoardButtonDetails.css';
 
-export class SymbolDetails extends Component {
+export class BoardButtonDetails extends Component {
   static propTypes = {
     open: PropTypes.bool,
     onRequestClose: PropTypes.func,
@@ -168,7 +168,7 @@ export class SymbolDetails extends Component {
     );
 
     return (
-      <div className="SymbolDetails">
+      <div className="BoardButtonDetails">
         <FullScreenDialog
           disableSubmit={!currentLabel}
           buttons={buttons}
@@ -183,15 +183,15 @@ export class SymbolDetails extends Component {
           onRequestClose={this.handleCancel}
           onSubmit={this.handleSubmit}
         >
-          <FullScreenDialogContent className="SymbolDetails__container">
-            <div className="SymbolDetails__symbol">
+          <FullScreenDialogContent className="BoardButtonDetails__container">
+            <div className="BoardButtonDetails__symbol">
               <InputImage
                 label={intl.formatMessage(messages.uploadAnImage)}
                 image={this.currentSymbolProp('img') || ''}
                 onChange={this.handleInputImageChange}
               />
             </div>
-            <div className="SymbolDetails__fields">
+            <div className="BoardButtonDetails__fields">
               <TextField
                 id="label"
                 label={intl.formatMessage(messages.label)}
@@ -209,7 +209,7 @@ export class SymbolDetails extends Component {
                 fullWidth
               />
               {!this.editingSymbol() && (
-                <div className="SymbolDetails__radiogroup">
+                <div className="BoardButtonDetails__radiogroup">
                   <FormControl>
                     <FormLabel>{intl.formatMessage(messages.type)}</FormLabel>
                     <RadioGroup
@@ -288,5 +288,5 @@ export function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  injectIntl(SymbolDetails)
+  injectIntl(BoardButtonDetails)
 );
