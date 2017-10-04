@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
 import Symbol from '../Symbol';
@@ -39,18 +38,20 @@ class BoardButton extends PureComponent {
     /**
      * Callback fired when clicking a button
      */
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
     /**
      * Callback fired when button is focused
      */
-    onFocus: PropTypes.func.isRequired,
+    onFocus: PropTypes.func,
     /**
-     * If true, button element will have focus
+     * If true, button element will be focused
      */
     hasFocus: PropTypes.bool
   };
 
   static defaultProps = {
+    id: '',
+    label: '',
     hasFocus: false
   };
 
@@ -90,7 +91,7 @@ class BoardButton extends PureComponent {
         onFocus={this.handleFocus}
         ref={element => (this.buttonElement = element)}
       >
-        <Symbol src={image} label={<FormattedMessage id={label} />} />
+        <Symbol src={image} label={label} />} />
         {children}
       </button>
     );

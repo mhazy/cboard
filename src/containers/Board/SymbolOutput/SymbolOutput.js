@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import keycode from 'keycode';
 import { withStyles } from 'material-ui/styles';
@@ -9,7 +8,7 @@ import BackspaceIcon from 'material-ui-icons/Backspace';
 import ClearIcon from 'material-ui-icons/Clear';
 
 import Symbol from '../Symbol';
-import './Output.css';
+import './SymbolOutput.css';
 
 const invertDirection = dir => (dir === 'ltr' ? 'rtl' : 'ltr');
 
@@ -24,7 +23,7 @@ const styles = {
   }
 };
 
-class Output extends Component {
+class SymbolOutput extends Component {
   static propTypes = {
     /**
      * @ignore
@@ -33,35 +32,35 @@ class Output extends Component {
     /**
      * Values to display
      */
-    values: PropTypes.arrayOf(
+    symbols: PropTypes.arrayOf(
       PropTypes.shape({
         /**
          * Label to display
          */
         label: PropTypes.string,
         /**
-         * Image to display source path
+         * Image source path
          */
         image: PropTypes.string
       })
     ),
     /**
-     * Callback fired when user click the output values
+     * Callback fired when user click the output symbols
      */
     onClick: PropTypes.func,
     /**
-     * Callback fired when output values change from inside the component
+     * Callback fired when output symbols change from inside the component
      */
     onChange: PropTypes.func
   };
 
   static defaultProps = {
-    values: []
+    symbols: []
   };
 
   handleOutputClick = () => {
-    const { onClick, values } = this.props;
-    onClick(values);
+    const { onClick, symbols } = this.props;
+    onClick(symbols);
   };
 
   handleOutputKeyDown = event => {
@@ -72,36 +71,36 @@ class Output extends Component {
 
   handleBackspaceClick = () => {
     const { onChange } = this.props;
-    const [...values] = this.props.values;
+    const [...symbols] = this.props.symbols;
 
-    if (values.length) {
-      values.pop();
-      onChange(values);
+    if (symbols.length) {
+      symbols.pop();
+      onChange(symbols);
     }
   };
 
   handleClearClick = () => {
     const { onChange } = this.props;
-    const values = [];
-    onChange(values);
+    const symbols = [];
+    onChange(symbols);
   };
 
   render() {
-    const { className, classes, dir, values } = this.props;
+    const { className, classes, dir, symbols } = this.props;
 
     return (
       <div className={classNames('Output', className)}>
         <div
           className="Output__scroll"
           style={{ direction: invertDirection(dir) }}
-          tabIndex={values.length ? '0' : '-1'}
+          tabIndex={symbols.length ? '0' : '-1'}
           onClick={this.handleOutputClick}
           onKeyDown={this.handleOutputKeyDown}
         >
-          <div className="Output__values-container" style={{ direction: dir }}>
-            {values.map(({ label, image }, index) => (
-              <div className="Output__value" key={index}>
-                <Symbol label={<FormattedMessage id={label} image={image} />} />
+          <div className="Output__symbols-container" style={{ direction: dir }}>
+            {symbols.map(({ label, image }, index) => (
+              <div className="Output__symbol" key={index}>
+                <Symbol label={label} image={image} />} />
               </div>
             ))}
           </div>
@@ -109,7 +108,7 @@ class Output extends Component {
 
         <IconButton
           className={classNames('Output__clear', classes.button)}
-          style={{ visibility: values.length ? 'visible' : 'hidden' }}
+          style={{ visibility: symbols.length ? 'visible' : 'hidden' }}
           onClick={this.handleClearClick}
         >
           <ClearIcon className={classes.icon} />
@@ -125,4 +124,4 @@ class Output extends Component {
   }
 }
 
-export default withStyles(styles, { name: 'Output' })(Output);
+export default withStyles(styles, { name: 'Output' })(SymbolOutput);
