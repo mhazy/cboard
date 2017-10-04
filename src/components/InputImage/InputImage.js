@@ -8,7 +8,13 @@ import './InputImage.css';
 
 class InputImage extends PureComponent {
   static propTypes = {
+    /**
+     * Image source path
+     */
     image: PropTypes.string,
+    /**
+     * Callback fired on image change
+     */
     onChange: PropTypes.func.isRequired
   };
 
@@ -48,7 +54,5 @@ class InputImage extends PureComponent {
     );
   }
 }
-
-function InputImage(props) {}
 
 export default InputImage;
