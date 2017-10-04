@@ -34,7 +34,7 @@
   cursor: pointer;
 }
 
-.InputImage__label.is-uploaded {
+.InputImage__label.is-hidden {
   height: 0;
   visibility: hidden;
 }

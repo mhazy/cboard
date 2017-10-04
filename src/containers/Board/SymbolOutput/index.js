@@ -1,1 +1,1 @@
-export { default } from './Output';
+export { default } from './SymbolOutput';

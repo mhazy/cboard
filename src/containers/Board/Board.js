@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 
 import Grid from '../../containers/Grid';
-import Output from './Output';
+import SymbolOutput from './SymbolOutput';
 import BoardButton from './BoardButton';
 
 import './Board.css';
@@ -74,8 +74,8 @@ export class Board extends Component {
     return (
       <div className="Board">
         <div className="Board__output">
-          <Output
-            values={output}
+          <SymbolOutput
+            symbols={output}
             onClick={onOutputClick}
             onChange={onOutputChange}
           />

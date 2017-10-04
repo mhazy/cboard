@@ -23,12 +23,20 @@ const styles = {
   }
 };
 
-class SymbolOutput extends Component {
+export class SymbolOutput extends Component {
   static propTypes = {
     /**
      * @ignore
      */
     className: PropTypes.string,
+    /**
+     * @ignore
+     */
+    classes: PropTypes.object,
+    /**
+     * Language direction
+     */
+    dir: PropTypes.string,
     /**
      * Values to display
      */
@@ -55,6 +63,8 @@ class SymbolOutput extends Component {
   };
 
   static defaultProps = {
+    classes: {},
+    dir: 'ltr',
     symbols: []
   };
 
@@ -87,19 +97,21 @@ class SymbolOutput extends Component {
 
   render() {
     const { className, classes, dir, symbols } = this.props;
-
     return (
-      <div className={classNames('Output', className)}>
+      <div className={classNames('SymbolOutput', className)}>
         <div
-          className="Output__scroll"
+          className="SymbolOutput__scroll-container"
           style={{ direction: invertDirection(dir) }}
           tabIndex={symbols.length ? '0' : '-1'}
           onClick={this.handleOutputClick}
           onKeyDown={this.handleOutputKeyDown}
         >
-          <div className="Output__symbols-container" style={{ direction: dir }}>
+          <div
+            className="SymbolOutput__symbols-container"
+            style={{ direction: dir }}
+          >
             {symbols.map(({ label, image }, index) => (
-              <div className="Output__symbol" key={index}>
+              <div className="SymbolOutput__symbol" key={index}>
                 <Symbol label={label} image={image} />} />
               </div>
             ))}
@@ -107,14 +119,14 @@ class SymbolOutput extends Component {
         </div>
 
         <IconButton
-          className={classNames('Output__clear', classes.button)}
+          className={classNames('SymbolOutput__clear', classes.button)}
           style={{ visibility: symbols.length ? 'visible' : 'hidden' }}
           onClick={this.handleClearClick}
         >
           <ClearIcon className={classes.icon} />
         </IconButton>
         <IconButton
-          className={classNames('Output__backspace', classes.button)}
+          className={classNames('SymbolOutput__backspace', classes.button)}
           onClick={this.handleBackspaceClick}
         >
           <BackspaceIcon className={classes.icon} />
@@ -124,4 +136,4 @@ class SymbolOutput extends Component {
   }
 }
 
-export default withStyles(styles, { name: 'Output' })(SymbolOutput);
+export default withStyles(styles, { name: 'SymbolOutput' })(SymbolOutput);
