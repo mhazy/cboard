@@ -19,15 +19,15 @@ class BoardButton extends PureComponent {
     /**
      * Button ID
      */
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
     /**
      * Label to display
      */
-    label: PropTypes.string,
+    label: PropTypes.string.isRequired,
     /**
-     * Board to load when clicking a folder
+     * Board to load on button click
      */
-    load_board: PropTypes.shape({ id: PropTypes.string }),
+    loadBoard: PropTypes.string,
     /**
      * Text to vocalize (speech synthesis), overrides label
      */
@@ -35,7 +35,7 @@ class BoardButton extends PureComponent {
     /**
      * Image to display source path
      */
-    imageSrc: PropTypes.string,
+    image: PropTypes.string,
     /**
      * Callback fired when clicking a button
      */
@@ -79,7 +79,7 @@ class BoardButton extends PureComponent {
   };
 
   render() {
-    const { className, children, label, imageSrc, load_board } = this.props;
+    const { className, children, label, image, load_board } = this.props;
 
     return (
       <button
@@ -90,7 +90,7 @@ class BoardButton extends PureComponent {
         onFocus={this.handleFocus}
         ref={element => (this.buttonElement = element)}
       >
-        <Symbol src={imageSrc} label={<FormattedMessage id={label} />} />
+        <Symbol src={image} label={<FormattedMessage id={label} />} />
         {children}
       </button>
     );
