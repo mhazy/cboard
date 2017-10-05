@@ -1,5 +1,3 @@
-import { getStore } from '../store';
-
 const synth = window.speechSynthesis;
 let voices = [];
 

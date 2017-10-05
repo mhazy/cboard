@@ -80,7 +80,7 @@ export class Board extends Component {
             onChange={onOutputChange}
           />
         </div>
-        <div className="Board__navigation-bar" />
+        <div className="Board__navbar" />
         <div className="Board__buttons">
           {board.buttons.map(button => (
             <BoardButton

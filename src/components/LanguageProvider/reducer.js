@@ -1,13 +1,11 @@
 import { CHANGE_LOCALE, SET_LOCALES } from './constants';
 import { appLocales } from '../../i18n';
 
-function getDir(locale) {
-  return locale === 'ar' || locale === 'he' ? 'rtl' : 'ltr';
-}
+const getDir = locale => (locale === 'ar' || locale === 'he' ? 'rtl' : 'ltr');
 
 const initialState = {
-  locale: '',
-  dir: '',
+  locale: 'en',
+  dir: 'ltr',
   locales: appLocales
 };
 

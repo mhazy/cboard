@@ -1,1 +1,1 @@
-export { default } from './speech';
+export { default } from './Speech.container';

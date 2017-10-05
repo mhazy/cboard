@@ -37,7 +37,6 @@ export class LanguageProvider extends Component {
 
   fetchMessages(locale) {
     this.setState({ messages: null });
-
     loadLocaleData(locale).then(messages => {
       this.setState({ messages });
     });
